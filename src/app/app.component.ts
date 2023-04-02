@@ -54,6 +54,11 @@ export class AppComponent {
       url: '/auth/sign-in',
       icon: 'person',
     },
+    {
+      title: 'Account',
+      url: '/account/view',
+      icon: 'person',
+    },
   ];
 
   constructor(

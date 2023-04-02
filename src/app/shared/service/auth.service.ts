@@ -37,7 +37,7 @@ export class AuthService {
         this.setUserData(result.user).then(() => console.log('done!'));
         this.afAuth.authState.subscribe((user) => {
           if (user) {
-            this.router.navigate(['dashboard']).then(() => console.log('done!'));
+            this.router.navigate(['/account/view']).then(() => console.log('done!'));
           }
         });
       })
