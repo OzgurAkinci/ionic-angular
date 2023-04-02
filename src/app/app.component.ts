@@ -5,8 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TabsPage } from './tabs/tabs.page';
 import { HomePage } from './home/home.page';
-import { FollowPage } from './follow/follow.page';
-import { LikePage } from './like/like.page';
+import { FollowsPage } from './follows/follows.page';
+import { LikesPage } from './likes/likes.page';
 
 export interface PageInterface {
   title: string;
@@ -36,17 +36,17 @@ export class AppComponent {
     },
     {
       title: 'Follows',
-      url: '/tabs/follow',
+      url: '/tabs/follows',
       icon: 'list',
     },
     {
       title: 'Likes',
-      url: '/tabs/like',
+      url: '/tabs/likes',
       icon: 'mail-outline',
     },
     {
       title: 'Settings',
-      url: '/tabs/settings',
+      url: '/base/settings',
       icon: 'settings',
     },
   ];

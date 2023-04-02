@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-follow',
-  templateUrl: 'follow.page.html',
-  styleUrls: ['follow.page.scss']
+  templateUrl: 'follows.page.html',
+  styleUrls: ['follows.page.scss']
 })
-export class FollowPage {
+export class FollowsPage {
 
   constructor() {}
 

@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-like',
-  templateUrl: 'like.page.html',
-  styleUrls: ['like.page.scss']
+  templateUrl: 'likes.page.html',
+  styleUrls: ['likes.page.scss']
 })
-export class LikePage {
+export class LikesPage {
 
   constructor() {}
 
