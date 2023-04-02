@@ -8,7 +8,6 @@ import {SignInPage} from './components/sign-in/sign-in.page';
 import {SignUpPage} from './components/sign-up/sign-up.page';
 import {AuthRoutingModule} from './auth-routing.module';
 
-
 @NgModule({
   imports: [
     IonicModule,

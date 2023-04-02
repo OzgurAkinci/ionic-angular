@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Router} from '@angular/router';
+import {AuthService} from "../../../../shared/service/auth.service";
 
 @Component({
   selector: 'app-auth-sign-in',
@@ -12,13 +13,16 @@ export class SignInPage implements OnInit{
 
   constructor(
     public router: Router,
+    public authService: AuthService
   ) { }
 
   ngOnInit() {
   }
 
 
-  login(){}
+  login(){
+    this.authService.SignIn(this.email, this.password);
+  }
 
 
   signup(){
