@@ -1,5 +1,27 @@
-<div id="container">
-  <strong>Sign-up</strong>
-  <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>sign-up</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <div class="form">
 
-</div>
+    <ion-item>
+      <ion-label position="stacked">Email</ion-label>
+      <ion-input [(ngModel)]='email'></ion-input>
+    </ion-item>
+    <br>
+
+    <ion-item>
+      <ion-label position="stacked">Password</ion-label>
+      <ion-input [(ngModel)]='password'></ion-input>
+    </ion-item>
+
+    <ion-button (click)='login()' expand='block'>Sign up</ion-button>
+    <br>
+
+    <h5 (click)='signin()'>Don't have account? <ion-text color='primary'>signin here</ion-text>
+    </h5>
+
+  </div>
+</ion-content>

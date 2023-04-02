@@ -7,8 +7,8 @@ import {Router} from '@angular/router';
   styleUrls: ['sign-in.page.scss']
 })
 export class SignInPage implements OnInit{
-  public email:any;
-  public password:any;
+  public email: any;
+  public password: any;
 
   constructor(
     public router: Router,
