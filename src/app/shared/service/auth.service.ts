@@ -7,12 +7,14 @@ import {
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import {User} from "../interfaces/user";
+import {AlertService} from "./alert.service";
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   userData: any; // Save logged in user data
   constructor(
+    public alertService: AlertService,
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
@@ -42,7 +44,7 @@ export class AuthService {
         });
       })
       .catch((error) => {
-        window.alert(error.message);
+        this.alertService.showAlert('Error', 'Sign-in error.', error.message);
       });
   }
 
