@@ -3,10 +3,10 @@ import { Component, ViewChild } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { TabsPage } from './tabs/tabs.page';
-import { HomePage } from './tabs/components/home/home.page';
-import { FollowsPage } from './tabs/components/follows/follows.page';
-import { LikesPage } from './tabs/components/likes/likes.page';
+import { TabsPage } from './modules/tabs/tabs.page';
+import { HomePage } from './modules/tabs/components/home/home.page';
+import { FollowsPage } from './modules/tabs/components/follows/follows.page';
+import { LikesPage } from './modules/tabs/components/likes/likes.page';
 
 export interface PageInterface {
   title: string;
@@ -48,6 +48,11 @@ export class AppComponent {
       title: 'Settings',
       url: '/base/settings',
       icon: 'settings',
+    },
+    {
+      title: 'Sign in',
+      url: '/auth/sign-in',
+      icon: 'person',
     },
   ];
 
