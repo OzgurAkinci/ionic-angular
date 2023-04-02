@@ -19,11 +19,7 @@ export class AccountViewPage implements OnInit{
   ngOnInit() {
   }
 
-
-  login(){}
-
-
-  signin(){
-    this.router.navigateByUrl('/auth/sign-in');
+  signOut(){
+    this.authService.signOut().then(() => console.log('done!'));
   }
 }

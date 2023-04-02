@@ -17,11 +17,5 @@ export class SignUpPage implements OnInit{
   ngOnInit() {
   }
 
-
-  login(){}
-
-
-  signin(){
-    this.router.navigateByUrl('/auth/sign-in');
-  }
+  signUp(){}
 }

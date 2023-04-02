@@ -8,13 +8,13 @@
 
     <ion-item>
       <ion-label position="stacked">Email</ion-label>
-      <ion-input [(ngModel)]='email'></ion-input>
+      <ion-input autocomplete="off" [(ngModel)]='email'></ion-input>
     </ion-item>
     <br>
 
     <ion-item>
       <ion-label position="stacked">Password</ion-label>
-      <ion-input [(ngModel)]='password'></ion-input>
+      <ion-input type="password" autocomplete="off" [(ngModel)]='password'></ion-input>
     </ion-item>
 
     <ion-button (click)='login()' expand='block'>Sign in</ion-button>

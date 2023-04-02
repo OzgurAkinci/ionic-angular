@@ -4,19 +4,43 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
-  AccountView
   <div class="row" *ngIf="authService.userData as user">
     <div class="col-md-12">
       <div class="media">
-        <img class="align-self-start mr-5 img-thumbnail rounded-circle" src="{{(user.photoURL) ? user.photoURL : '/assets/dummy-user.png'}}"
-             alt="{{user.displayName}}">
+        <ion-avatar>
+          <img alt="{{user.displayName}}" src="{{(user.photoURL) ? user.photoURL : '/assets/dummy-user.png'}}" />
+        </ion-avatar>
         <div class="media-body">
-          <h1>Hello: <strong>{{(user.displayName) ? user.displayName : 'User'}}</strong></h1>
-          <p>User ID: <strong>{{user.uid}}</strong></p>
-          <p>Email: <strong>{{user.email}}</strong></p>
-          <p>Email Verified: <strong>{{user.emailVerified}}</strong></p>
+          <ion-item>
+            <ion-label>
+              <h2>Name</h2>
+              <p>{{(user.displayName) ? user.displayName : 'User'}}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>
+              <h2>User ID</h2>
+              <p>{{user.uid}}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>
+              <h2>Email</h2>
+              <p>{{user.email}}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>
+              <h2>Email Verified</h2>
+              <p>{{user.emailVerified}}</p>
+            </ion-label>
+          </ion-item>
         </div>
       </div>
     </div>
+    <ion-button (click)='signOut()' expand='block'>SignOut</ion-button>
   </div>
 </ion-content>
