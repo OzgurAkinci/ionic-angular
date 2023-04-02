@@ -21,7 +21,7 @@ export class SignInPage implements OnInit{
 
 
   login(){
-    this.authService.SignIn(this.email, this.password);
+    this.authService.signIn(this.email, this.password).then(() => console.log("done!"));
   }
 
 
