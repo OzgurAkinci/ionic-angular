@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BasePage } from './base.page';
-import {SettingsPage} from './components/settings.page';
+import {SettingsPage} from './components/settings/settings.page';
 
 const routes: Routes = [
   {
