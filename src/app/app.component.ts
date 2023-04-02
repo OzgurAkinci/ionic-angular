@@ -4,9 +4,9 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TabsPage } from './tabs/tabs.page';
-import { HomePage } from './home/home.page';
-import { FollowsPage } from './follows/follows.page';
-import { LikesPage } from './likes/likes.page';
+import { HomePage } from './tabs/components/home/home.page';
+import { FollowsPage } from './tabs/components/follows/follows.page';
+import { LikesPage } from './tabs/components/likes/likes.page';
 
 export interface PageInterface {
   title: string;

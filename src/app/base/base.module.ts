@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 
 import {BaseRoutingModule} from './base-routing.module';
 import {BasePage} from './base.page';
-import {ExploreContainerComponentModule} from '../explore-container/explore-container.module';
 import {SettingsPage} from './components/settings/settings.page';
 
 
@@ -14,8 +13,7 @@ import {SettingsPage} from './components/settings/settings.page';
     IonicModule,
     CommonModule,
     FormsModule,
-    BaseRoutingModule,
-    ExploreContainerComponentModule
+    BaseRoutingModule
   ],
   declarations: [BasePage, SettingsPage]
 })
