@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+//import { SplashScreen } from '@capacitor/splash-screen';
+//import { StatusBar } from '@capacitor/status-bar';
 import { TabsPage } from './modules/tabs/tabs.page';
 
 export interface PageInterface {
@@ -59,9 +59,7 @@ export class AppComponent {
   ];
 
   constructor(
-    private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private platform: Platform
   ) {
     this.initializeApp();
   }
@@ -70,8 +68,9 @@ export class AppComponent {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      //this.statusBar.styleDefault();
+      //this.splashScreen.hide();
+
     });
   }
 
