@@ -6,6 +6,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AccountPage} from "./account.page";
 import {AccountViewPage} from "./components/account-view/account-view.page";
 import {AccountRoutingModule} from "./account-routing.module";
+import {VerifyEmailPage} from "./components/verify-email/verify-email.page";
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import {AccountRoutingModule} from "./account-routing.module";
     AccountRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [AccountPage, AccountViewPage],
+  declarations: [AccountPage, AccountViewPage, VerifyEmailPage],
   providers: []
 })
 export class AccountModule {}

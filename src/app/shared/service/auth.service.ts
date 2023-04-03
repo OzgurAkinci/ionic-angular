@@ -8,11 +8,13 @@ import {
 import { Router } from '@angular/router';
 import {User} from "../interfaces/user";
 import {AlertService} from "./alert.service";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   userData: any; // Save logged in user data
+  private loggedIn = new BehaviorSubject<boolean>(false);
   constructor(
     public alertService: AlertService,
     public afs: AngularFirestore, // Inject Firestore service
@@ -22,10 +24,12 @@ export class AuthService {
   ) {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
+        this.setLoginStatus(true);
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user')!);
       } else {
+        this.setLoginStatus(false);
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);
       }
@@ -44,7 +48,7 @@ export class AuthService {
         });
       })
       .catch((error) => {
-        this.alertService.showAlert('Error', 'Sign-in error.', error.message);
+        this.alertService.showAlert('Error', null, error.message);
       });
   }
 
@@ -52,7 +56,9 @@ export class AuthService {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        this.sendVerificationMail().then(() => console.log('done!'));
+        this.sendVerificationMail().then(() => {
+          this.router.navigate(['/account/verify-email']).then(() => console.log('done!'));
+        });
         this.setUserData(result.user).then(() => console.log('done!'));
         this.alertService.showAlert('Success', 'Sign-up success.', "User successfully created.").then(() => console.log('done!'));
       })
@@ -63,10 +69,7 @@ export class AuthService {
 
   sendVerificationMail() {
     return this.afAuth.currentUser
-      .then((u: any) => u.sendEmailVerification())
-      .then(() => {
-        this.router.navigate(['verify-email-address']).then(() => console.log('done!'));
-      });
+      .then((u: any) => u.sendEmailVerification());
   }
 
   forgotPassword(passwordResetEmail: string) {
@@ -83,6 +86,11 @@ export class AuthService {
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user')!);
     return user !== null && user.emailVerified !== false;
+  }
+
+  get isEmailVerified(): boolean {
+    const user = JSON.parse(localStorage.getItem('user'));
+    return user.emailVerified !== false;
   }
 
   googleAuth() {
@@ -106,6 +114,7 @@ export class AuthService {
   sign up with username/password and sign in with social auth
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
   setUserData(user: any) {
+    this.setLoginStatus(true);
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
@@ -123,8 +132,17 @@ export class AuthService {
   // Sign out
   signOut() {
     return this.afAuth.signOut().then(() => {
+      this.setLoginStatus(false);
       localStorage.removeItem('user');
       this.router.navigate(['/auth/sign-in']).then(() => console.log('done!'));
     });
+  }
+
+  getLoginStatus():Observable<boolean>{
+    return this.loggedIn;
+  }
+
+  setLoginStatus(data:boolean) {
+    this.loggedIn.next(data);
   }
 }

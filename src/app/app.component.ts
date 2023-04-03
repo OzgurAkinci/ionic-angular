@@ -4,6 +4,13 @@ import { Platform } from '@ionic/angular';
 //import { SplashScreen } from '@capacitor/splash-screen';
 //import { StatusBar } from '@capacitor/status-bar';
 import { TabsPage } from './modules/tabs/tabs.page';
+import {Observable} from "rxjs";
+import firebase from "firebase/compat";
+import {AuthService} from "./shared/service/auth.service";
+import {Router} from "@angular/router";
+import {AngularFireAuth} from "@angular/fire/compat/auth";
+import {tap} from "rxjs/operators";
+import {User} from "./shared/interfaces/user";
 
 export interface PageInterface {
   title: string;
@@ -24,6 +31,7 @@ export interface PageInterface {
 export class AppComponent {
   rootPage: any = TabsPage;
   version = '0.0.1';
+  loggedIn$:Observable<boolean>
 
   public appPages = [
     {
@@ -58,10 +66,15 @@ export class AppComponent {
     },
   ];
 
-  constructor(
-    private platform: Platform
-  ) {
+  constructor(private platform: Platform,public authService: AuthService,  public router: Router,
+              public afAuth: AngularFireAuth) {
     this.initializeApp();
+
+    this.loggedIn$ = this.authService.getLoginStatus();
+
+    if(this.authService.isLoggedIn && !this.authService.isEmailVerified) {
+      this.router.navigate(['/account/verify-email']).then(() => console.log('done!'));
+    }
   }
 
   initializeApp() {
