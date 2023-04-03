@@ -15,6 +15,7 @@ import {AccountRoutingModule} from "./account-routing.module";
     AccountRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [AccountPage, AccountViewPage]
+  declarations: [AccountPage, AccountViewPage],
+  providers: []
 })
 export class AccountModule {}

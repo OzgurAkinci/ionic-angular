@@ -6,9 +6,14 @@
 <ion-content class="ion-padding">
   <div class="row" *ngIf="authService.userData as user">
     <div class="col-md-12">
-      <div class="media">
-        <ion-avatar>
-          <img alt="{{user.displayName}}" src="{{(user.photoURL) ? user.photoURL : '/assets/dummy-user.png'}}" />
+      <div class="media preview">
+        <ion-avatar (click)="changeImage()">
+          <img *ngIf="user?.photoURL; else placeholder_avatar;" alt="{{user.displayName}}" src="{{(user.photoURL) ? user.photoURL : '/assets/dummy-user.png'}}" />
+          <ng-template #placeholder_avatar>
+            <div class="fallback">
+              <p>Select avatar</p>
+            </div>
+          </ng-template>
         </ion-avatar>
         <div class="media-body">
           <ion-item>
