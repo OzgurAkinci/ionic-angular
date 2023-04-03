@@ -14,13 +14,15 @@
 
     <ion-item>
       <ion-label position="stacked">Password</ion-label>
-      <ion-input [(ngModel)]='password'></ion-input>
+      <ion-input type="password" [(ngModel)]='password'></ion-input>
     </ion-item>
 
-    <ion-button (click)='login()' expand='block'>Sign up</ion-button>
+    <ion-button (click)='signUp()' expand='block'>
+      Sign up
+    </ion-button>
     <br>
 
-    <h5 (click)='signIn()'>Don't have account? <ion-text color='primary'>signin here</ion-text>
+    <h5 (click)='signInPage()'>Don't have account? <ion-text color='primary'>signin here</ion-text>
     </h5>
 
   </div>

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from "../../../../shared/service/auth.service";
 import {AlertService} from "../../../../shared/service/alert.service";
+import {LoadingService} from "../../../../shared/service/loading.service";
 
 @Component({
   selector: 'app-auth-sign-in',
@@ -11,26 +12,25 @@ import {AlertService} from "../../../../shared/service/alert.service";
 export class SignInPage implements OnInit{
   public email: any;
   public password: any;
-  public loading = false;
 
   constructor(
     public router: Router,
     public authService: AuthService,
-    public alertService: AlertService
+    public loadingService: LoadingService
   ) { }
 
   ngOnInit() {
   }
 
-  login(){
-    this.loading = true;
+  signIn(){
+    this.loadingService.present();
     this.authService.signIn(this.email, this.password).then(() => {
-      this.loading = false;
+      this.loadingService.dismiss();
     });
   }
 
 
-  signup(){
+  signUpPage(){
     this.router.navigateByUrl('/auth/sign-up');
   }
 }

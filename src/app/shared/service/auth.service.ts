@@ -54,9 +54,10 @@ export class AuthService {
       .then((result) => {
         this.sendVerificationMail().then(() => console.log('done!'));
         this.setUserData(result.user).then(() => console.log('done!'));
+        this.alertService.showAlert('Success', 'Sign-up success.', "User successfully created.").then(() => console.log('done!'));
       })
       .catch((error) => {
-        window.alert(error.message);
+        this.alertService.showAlert('Error', 'Sign-up error.', error.message).then(() => console.log('done!'));
       });
   }
 
