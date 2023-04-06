@@ -16,7 +16,7 @@ Build
 ```
 -- for dev
 ionic build
--- for prod
+-- for prod (white screen problem fixed!)
 ionic build --prod --release
 ```
 
