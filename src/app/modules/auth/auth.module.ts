@@ -1,5 +1,5 @@
 import { IonicModule } from '@ionic/angular';
-import { NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
@@ -16,6 +16,7 @@ import {AuthRoutingModule} from './auth-routing.module';
     AuthRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [AuthPage, SignInPage, SignUpPage]
+  declarations: [AuthPage, SignInPage, SignUpPage],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AuthModule {}

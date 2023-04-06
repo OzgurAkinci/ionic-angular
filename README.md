@@ -14,7 +14,10 @@ ionic serve
 
 Build
 ```
+-- for dev
 ionic build
+-- for prod
+ionic build --prod --release
 ```
 
 Run On Android Emulator:
