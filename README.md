@@ -30,14 +30,14 @@ Run On iOS Simulator:
 ionic capacitor run ios -l --external
 ```
 
-###Login Page:###
+### Login Page: ###
 ![login-view](https://github.com/OzgurAkinci/ionic-angular/blob/master/4.png?raw=true)
 
-###Account Page:###
+### Account Page: ###
 ![login-view](https://github.com/OzgurAkinci/ionic-angular/blob/master/1.png?raw=true)
 
-###Side Menu:###
+### Side Menu: ###
 ![login-view](https://github.com/OzgurAkinci/ionic-angular/blob/master/2.png?raw=true)
 
-###Tab View:###
+### Tab View: ###
 ![login-view](https://github.com/OzgurAkinci/ionic-angular/blob/master/3.png?raw=true)
