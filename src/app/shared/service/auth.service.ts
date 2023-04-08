@@ -13,7 +13,7 @@ const USER_KEY = 'my-user';
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService {
+export class AuthService {
   // Init with null to filter out the first value in a guard!
   isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
   currentAccessToken = null;

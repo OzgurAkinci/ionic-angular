@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {AccountService} from "../../../../shared/service/account.service";
 import {Camera, CameraResultType, CameraSource} from "@capacitor/camera";
 import {AlertController, LoadingController, ModalController} from "@ionic/angular";
-import {ApiService} from "../../../../shared/service/api.service";
+import {AuthService} from "../../../../shared/service/auth.service";
 import {ProfilePhotoOptionComponent} from "../profile-photo-option/profile-photo-option.page";
 
 @Component({
@@ -20,7 +20,7 @@ export class AccountViewPage implements OnInit{
     private accountService: AccountService,
     private loadingController: LoadingController,
     private alertController: AlertController,
-    private apiService: ApiService,
+    private apiService: AuthService,
     private modalController: ModalController
   ) { }
 

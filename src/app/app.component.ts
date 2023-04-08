@@ -4,7 +4,7 @@ import { Platform } from '@ionic/angular';
 import { TabsPage } from './modules/tabs/tabs.page';
 import {Observable} from "rxjs";
 import {Router} from "@angular/router";
-import {ApiService} from "./shared/service/api.service";
+import {AuthService} from "./shared/service/auth.service";
 
 export interface PageInterface {
   title: string;
@@ -61,12 +61,12 @@ export class AppComponent {
   ];
 
   constructor(private platform: Platform, public router: Router,
-              private apiService: ApiService) {
+              private authService: AuthService) {
     this.initializeApp();
 
-    this.loggedIn$ = this.apiService.isAuthenticated;
+    this.loggedIn$ = this.authService.isAuthenticated;
 
-    if(this.loggedIn$ && this.apiService.currentUser && !this.apiService.currentUser.isEmailVerified) {
+    if(this.loggedIn$ && this.authService.currentUser && !this.authService.currentUser.isEmailVerified) {
       this.router.navigate(['/account/verify-email']).then(() => console.log('done!'));
     }
   }

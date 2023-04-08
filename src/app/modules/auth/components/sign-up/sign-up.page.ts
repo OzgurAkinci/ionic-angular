@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {ApiService} from "../../../../shared/service/api.service";
+import {AuthService} from "../../../../shared/service/auth.service";
 import {LoadingController} from "@ionic/angular";
 
 @Component({
@@ -14,7 +14,7 @@ export class SignUpPage implements OnInit{
 
   constructor(
     public router: Router,
-    public apiService: ApiService,
+    public authService: AuthService,
     public loadingController: LoadingController
   ) { }
 

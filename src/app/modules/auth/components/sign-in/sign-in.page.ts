@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {ApiService} from "../../../../shared/service/api.service";
+import {AuthService} from "../../../../shared/service/auth.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AlertController, LoadingController} from "@ionic/angular";
 
@@ -18,7 +18,7 @@ export class SignInPage implements OnInit{
   constructor(
     private fb: FormBuilder,
     public router: Router,
-    private apiService: ApiService,
+    private authService: AuthService,
     private alertController: AlertController,
     private loadingController: LoadingController
   ) { }
@@ -34,7 +34,7 @@ export class SignInPage implements OnInit{
     const loading = await this.loadingController.create();
     await loading.present();
 
-    this.apiService.login(this.credentials.value).subscribe(
+    this.authService.login(this.credentials.value).subscribe(
       async _ => {
         await loading.dismiss();
         this.router.navigateByUrl('/account/view', { replaceUrl: true });

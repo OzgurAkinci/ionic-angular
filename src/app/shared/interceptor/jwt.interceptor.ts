@@ -9,7 +9,7 @@ import {
   take,
 } from 'rxjs/operators';
 import { ToastController } from '@ionic/angular';
-import {ApiService} from "../service/api.service";
+import {AuthService} from "../service/auth.service";
 import {environment} from "../../../environments/environment";
 
 @Injectable()
@@ -18,7 +18,7 @@ export class JwtInterceptor implements HttpInterceptor {
   tokenSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
   isRefreshingToken = false;
 
-  constructor(private apiService: ApiService, private toastCtrl: ToastController) { }
+  constructor(private authService: AuthService, private toastCtrl: ToastController) { }
 
   // Intercept every HTTP call
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -59,10 +59,10 @@ export class JwtInterceptor implements HttpInterceptor {
 
   // Add our current access token from the service if present
   private addToken(req: HttpRequest<any>) {
-    if (this.apiService.currentAccessToken) {
+    if (this.authService.currentAccessToken) {
       return req.clone({
         headers: new HttpHeaders({
-          Authorization: `Bearer ${this.apiService.currentAccessToken}`
+          Authorization: `Bearer ${this.authService.currentAccessToken}`
         })
       });
     } else {
@@ -80,7 +80,7 @@ export class JwtInterceptor implements HttpInterceptor {
       duration: 2000
     });
     toast.present();
-    this.apiService.logout();
+    this.authService.logout();
     return of(null);
   }
 
@@ -93,15 +93,15 @@ export class JwtInterceptor implements HttpInterceptor {
       // until we got a new token!
       this.tokenSubject.next(null);
       this.isRefreshingToken = true;
-      this.apiService.currentAccessToken = null;
+      this.authService.currentAccessToken = null;
 
       // First, get a new access token
-      return this.apiService.getNewAccessToken().pipe(
+      return this.authService.getNewAccessToken().pipe(
         switchMap((token: any) => {
           if (token) {
             // Store the new token
             const accessToken = token.accessToken;
-            return this.apiService.storeAccessToken(accessToken).pipe(
+            return this.authService.storeAccessToken(accessToken).pipe(
               switchMap(_ => {
                 // Use the subject so other calls can continue with the new token
                 this.tokenSubject.next(accessToken);
