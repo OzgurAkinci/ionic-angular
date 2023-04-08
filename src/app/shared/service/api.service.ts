@@ -21,11 +21,11 @@ export class ApiService {
   url = environment.api_url;
 
   constructor(private http: HttpClient, private router: Router) {
-    this.loadToken();
+    this.loadAuthData();
   }
 
-  // Load accessToken on startup
-  async loadToken() {
+  // Load authData on startup
+  async loadAuthData() {
     const token = await Preferences.get({ key: ACCESS_TOKEN_KEY });
     const user = await Preferences.get({ key: USER_KEY });
     if (token && token.value && user) {
@@ -35,11 +35,6 @@ export class ApiService {
     } else {
       this.isAuthenticated.next(false);
     }
-  }
-
-  // Get our secret protected data
-  getSecretData() {
-    return this.http.get(`${this.url}/users/secret`);
   }
 
   // Create new user
@@ -52,6 +47,7 @@ export class ApiService {
     return this.http.post(`${this.url}/auth/signin`, credentials).pipe(
       switchMap((tokens: {accessToken, refreshToken, user }) => {
         this.currentAccessToken = tokens.accessToken;
+        this.currentUser = JSON.parse(JSON.stringify(tokens.user));
         const storeAccess = Preferences.set({key: ACCESS_TOKEN_KEY, value: tokens.accessToken});
         const storeRefresh = Preferences.set({key: REFRESH_TOKEN_KEY, value: tokens.refreshToken});
         const storeUser = Preferences.set({key: USER_KEY, value: JSON.stringify(tokens.user)});
@@ -69,10 +65,12 @@ export class ApiService {
     return this.http.post(`${this.url}/auth/signout`, {}).pipe(
       switchMap(_ => {
         this.currentAccessToken = null;
+        this.currentUser = null;
         // Remove all stored tokens
         const deleteAccess = Preferences.remove({ key: ACCESS_TOKEN_KEY });
         const deleteRefresh = Preferences.remove({ key: REFRESH_TOKEN_KEY });
-        return from(Promise.all([deleteAccess, deleteRefresh]));
+        const storeUser = Preferences.remove({ key: USER_KEY });
+        return from(Promise.all([deleteAccess, deleteRefresh, storeUser]));
       }),
       tap(_ => {
         this.isAuthenticated.next(false);
@@ -94,7 +92,7 @@ export class ApiService {
               Authorization: `Bearer ${token.value}`
             })
           }
-          return this.http.get(`${this.url}/auth/refresh`, httpOptions);
+          return this.http.get(`${this.url}/auth/refreshtoken`, httpOptions);
         } else {
           // No stored refresh token
           return of(null);
@@ -103,9 +101,13 @@ export class ApiService {
     );
   }
 
-  // Store a new access token
   storeAccessToken(accessToken) {
     this.currentAccessToken = accessToken;
     return from(Preferences.set({ key: ACCESS_TOKEN_KEY, value: accessToken }));
+  }
+
+  storeCurrentUser(currentUser) {
+    this.currentUser = currentUser;
+    return from(Preferences.set({ key: USER_KEY, value: currentUser }));
   }
 }

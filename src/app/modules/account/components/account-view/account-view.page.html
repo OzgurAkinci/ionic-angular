@@ -3,23 +3,24 @@
     <ion-title>AccountView</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content class="ion-padding">
-  <div class="row" *ngIf="apiService.currentUser as user">
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="container">
+    <div class="outer"
+         [ngStyle]="{'background-image': 'url(' + photo + ')'}">
+      <div class="inner" (click)="openOptionSelection()">
+        <ion-icon name="camera" class="camera-icon"></ion-icon>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="currentUser as user">
     <div class="col-md-12">
       <div class="media preview">
-        <ion-avatar (click)="changeImage()">
-          <img *ngIf="user?.photoURL; else placeholder_avatar;" alt="{{user.displayName}}" src="{{(user.photoURL) ? user.photoURL : '/assets/dummy-user.png'}}" />
-          <ng-template #placeholder_avatar>
-            <div class="fallback">
-              <p>Select avatar</p>
-            </div>
-          </ng-template>
-        </ion-avatar>
         <div class="media-body">
           <ion-item>
             <ion-label>
               <h2>Name</h2>
-              <p>{{(user.displayName) ? user.displayName : 'User'}}</p>
+              <p>{{(user.displayName) ? user.displayName : 'Unknown'}}</p>
             </ion-label>
           </ion-item>
 
@@ -53,6 +54,6 @@
         </div>
       </div>
     </div>
-    <ion-button (click)='signOut()' expand='block'>SignOut</ion-button>
+    <ion-button (click)='signOut()' color="dark" expand='block'>SignOut</ion-button>
   </div>
 </ion-content>

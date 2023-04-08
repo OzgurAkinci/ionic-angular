@@ -1,16 +1,9 @@
 import { Component } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
-//import { SplashScreen } from '@capacitor/splash-screen';
-//import { StatusBar } from '@capacitor/status-bar';
 import { TabsPage } from './modules/tabs/tabs.page';
 import {Observable} from "rxjs";
-import firebase from "firebase/compat";
-import {AuthService} from "./shared/service/auth.service";
 import {Router} from "@angular/router";
-import {AngularFireAuth} from "@angular/fire/compat/auth";
-import {tap} from "rxjs/operators";
-import {User} from "./shared/interfaces/user";
 import {ApiService} from "./shared/service/api.service";
 
 export interface PageInterface {
@@ -67,13 +60,13 @@ export class AppComponent {
     },
   ];
 
-  constructor(private platform: Platform,public authService: AuthService,  public router: Router,
-              public afAuth: AngularFireAuth, private apiService: ApiService) {
+  constructor(private platform: Platform, public router: Router,
+              private apiService: ApiService) {
     this.initializeApp();
 
     this.loggedIn$ = this.apiService.isAuthenticated;
 
-    if(this.authService.isLoggedIn && !this.authService.isEmailVerified) {
+    if(this.loggedIn$ && this.apiService.currentUser && !this.apiService.currentUser.isEmailVerified) {
       this.router.navigate(['/account/verify-email']).then(() => console.log('done!'));
     }
   }

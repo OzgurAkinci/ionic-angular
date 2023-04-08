@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {AuthService} from "../../../../shared/service/auth.service";
-import {AlertService} from "../../../../shared/service/alert.service";
-import {LoadingService} from "../../../../shared/service/loading.service";
+import {ApiService} from "../../../../shared/service/api.service";
+import {LoadingController} from "@ionic/angular";
 
 @Component({
   selector: 'app-auth-sign-up',
@@ -15,18 +14,15 @@ export class SignUpPage implements OnInit{
 
   constructor(
     public router: Router,
-    public authService: AuthService,
-    public loadingService: LoadingService
+    public apiService: ApiService,
+    public loadingController: LoadingController
   ) { }
 
   ngOnInit() {
   }
 
   signUp(){
-    this.loadingService.present();
-    this.authService.signUp(this.email, this.password).then(() => {
-      this.loadingService.dismiss();
-    });
+
   }
 
   signInPage(){

@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {AuthService} from "../../../../shared/service/auth.service";
 import {ApiService} from "../../../../shared/service/api.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AlertController, LoadingController} from "@ionic/angular";
@@ -19,7 +18,6 @@ export class SignInPage implements OnInit{
   constructor(
     private fb: FormBuilder,
     public router: Router,
-    public authService: AuthService,
     private apiService: ApiService,
     private alertController: AlertController,
     private loadingController: LoadingController

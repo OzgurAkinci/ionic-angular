@@ -1,22 +1,38 @@
-ion-avatar {
-  width: 128px;
-  height: 128px;
+.container {
+  width: 150px;
+  height: 150px;
+  display: block;
+  margin: 0 auto;
 }
-
-.preview {
-  margin-top: 50px;
-  display: flex;
-  justify-content: center;
+.profile-pic {
+  width: 150px;
+  height: 150px;
 }
-
-.fallback {
-  width: 128px;
-  height: 128px;
-  border-radius: 50%;
-  background: #bfbfbf;
-
+.outer {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 150px !important; /* any size */
+  max-height: 150px !important; /* any size */
+  margin: auto;
+  border-radius: 100%;
+  position: relative;
+  background-size: 150px 150px;
+}
+.inner {
+  background-color: #222428;
+  width: 45px;
+  height: 45px;
+  border-radius: 100%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
   display: flex;
-  justify-content: center;
   align-items: center;
-  font-weight: 500;
+  justify-content: center;
 }
+.camera-icon {
+  height: 30px;
+  width: 30px;
+  color: white;
+}
+

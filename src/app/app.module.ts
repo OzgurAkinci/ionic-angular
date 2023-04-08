@@ -7,9 +7,6 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-// Firebase services + environment module
-import {AngularFireModule} from '@angular/fire/compat';
-import {environment} from "../environments/environment";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {JwtInterceptor} from "./shared/interceptor/jwt.interceptor";
 
@@ -17,7 +14,6 @@ import {JwtInterceptor} from "./shared/interceptor/jwt.interceptor";
     declarations: [AppComponent],
     entryComponents: [],
     imports: [
-      AngularFireModule.initializeApp(environment.firebase),
       HttpClientModule,
       BrowserModule,
       IonicModule.forRoot(),

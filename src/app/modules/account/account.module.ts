@@ -7,6 +7,7 @@ import {AccountPage} from "./account.page";
 import {AccountViewPage} from "./components/account-view/account-view.page";
 import {AccountRoutingModule} from "./account-routing.module";
 import {VerifyEmailPage} from "./components/verify-email/verify-email.page";
+import {ProfilePhotoOptionComponent} from "./components/profile-photo-option/profile-photo-option.page";
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import {VerifyEmailPage} from "./components/verify-email/verify-email.page";
     AccountRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [AccountPage, AccountViewPage, VerifyEmailPage],
+  declarations: [AccountPage, AccountViewPage, VerifyEmailPage, ProfilePhotoOptionComponent],
   providers: []
 })
 export class AccountModule {}
