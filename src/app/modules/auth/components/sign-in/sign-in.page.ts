@@ -10,9 +10,6 @@ import {AlertController, LoadingController} from "@ionic/angular";
   styleUrls: ['sign-in.page.scss']
 })
 export class SignInPage implements OnInit{
-  public email: any;
-  public password: any;
-
   credentials: FormGroup;
 
   constructor(
@@ -42,8 +39,8 @@ export class SignInPage implements OnInit{
       async (res) => {
         await loading.dismiss();
         const alert = await this.alertController.create({
-          header: 'Login failed',
-          message: res.error.msg,
+          header: 'Failed',
+          message: res.error.error,
           buttons: ['OK'],
         });
         await alert.present();

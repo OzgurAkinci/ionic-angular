@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { TabsPage } from './modules/tabs/tabs.page';
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {Router} from "@angular/router";
 import {AuthService} from "./shared/service/auth.service";
 
@@ -60,7 +60,7 @@ export class AppComponent {
     },
   ];
 
-  constructor(private platform: Platform, public router: Router,
+  constructor(private platform: Platform, private router: Router,
               private authService: AuthService) {
     this.initializeApp();
 

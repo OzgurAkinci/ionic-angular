@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { tap, switchMap } from 'rxjs/operators';
-import { BehaviorSubject, from, Observable, of } from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {tap, switchMap, catchError} from 'rxjs/operators';
+import {BehaviorSubject, from, Observable, of, throwError} from 'rxjs';
 import { Router } from '@angular/router';
 import {environment} from "../../../environments/environment";
 import { Preferences } from '@capacitor/preferences';
@@ -39,12 +39,15 @@ export class AuthService {
 
   // Create new user
   signUp(credentials: {username, password}): Observable<any> {
-    return this.http.post(`${this.url}/users`, credentials);
+    return this.http.post(`${this.url}/auth/signup`, credentials);
   }
 
-  // Sign in a user and store access and refres token
+  // Sign in a user and store access and refresh token
   login(credentials: {username, password}): Observable<any> {
     return this.http.post(`${this.url}/auth/signin`, credentials).pipe(
+      catchError(err =>  {
+        return throwError(err);
+      }),
       switchMap((tokens: {accessToken, refreshToken, user }) => {
         this.currentAccessToken = tokens.accessToken;
         this.currentUser = JSON.parse(JSON.stringify(tokens.user));

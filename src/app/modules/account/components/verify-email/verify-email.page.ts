@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {AccountService} from "../../../../shared/service/account.service";
 
 @Component({
   selector: 'app-account-verify',
@@ -9,8 +10,12 @@ export class VerifyEmailPage implements OnInit{
   public email: any;
   public password: any;
 
-  constructor() { }
+  constructor(private accountService: AccountService) { }
 
   ngOnInit() {
+  }
+
+  sendVerificationMail() {
+
   }
 }

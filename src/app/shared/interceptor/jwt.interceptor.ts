@@ -24,7 +24,7 @@ export class JwtInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     // Check if we need additional token logic or not
-    if (this.isInBlockedList(request.url)) {
+    if (JwtInterceptor.isInBlockedList(request.url)) {
       return next.handle(request);
     } else {
       return next.handle(this.addToken(request)).pipe(
@@ -47,14 +47,10 @@ export class JwtInterceptor implements HttpInterceptor {
   }
 
   // Filter out URLs where you don't want to add the token!
-  private isInBlockedList(url: string): Boolean {
+  private static isInBlockedList(url: string): Boolean {
     // Example: Filter out our login and logout API call
-    if (url == `${environment.api_url}/auth` ||
-      url == `${environment.api_url}/auth/logout`) {
-      return true;
-    } else {
-      return false;
-    }
+    return url === `${environment.api_url}/auth/signin` ||
+      url === `${environment.api_url}/auth/signup`;
   }
 
   // Add our current access token from the service if present
