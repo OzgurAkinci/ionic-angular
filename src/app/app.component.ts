@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {tap} from "rxjs/operators";
 import {User} from "./shared/interfaces/user";
+import {ApiService} from "./shared/service/api.service";
 
 export interface PageInterface {
   title: string;
@@ -67,10 +68,10 @@ export class AppComponent {
   ];
 
   constructor(private platform: Platform,public authService: AuthService,  public router: Router,
-              public afAuth: AngularFireAuth) {
+              public afAuth: AngularFireAuth, private apiService: ApiService) {
     this.initializeApp();
 
-    this.loggedIn$ = this.authService.getLoginStatus();
+    this.loggedIn$ = this.apiService.isAuthenticated;
 
     if(this.authService.isLoggedIn && !this.authService.isEmailVerified) {
       this.router.navigate(['/account/verify-email']).then(() => console.log('done!'));

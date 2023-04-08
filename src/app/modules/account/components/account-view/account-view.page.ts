@@ -4,6 +4,7 @@ import {AuthService} from "../../../../shared/service/auth.service";
 import {AccountService} from "../../../../shared/service/account.service";
 import {Camera, CameraResultType, CameraSource} from "@capacitor/camera";
 import {AlertController, LoadingController} from "@ionic/angular";
+import {ApiService} from "../../../../shared/service/api.service";
 
 @Component({
   selector: 'app-account-view',
@@ -14,19 +15,22 @@ export class AccountViewPage implements OnInit{
   public email: any;
   public password: any;
 
+  secretData = null;
+
   constructor(
     public router: Router,
     public authService: AuthService,
     public accountService: AccountService,
     public loadingController: LoadingController,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private apiService: ApiService
   ) { }
 
   ngOnInit() {
   }
 
   signOut(){
-    this.authService.signOut().then(() => console.log('done!'));
+    this.apiService.logout();
   }
 
   async changeImage() {
@@ -53,5 +57,13 @@ export class AccountViewPage implements OnInit{
         await alert.present();
       }
     }
+  }
+
+  async getData() {
+    this.secretData = null;
+
+    this.apiService.getSecretData().subscribe((res: any) => {
+      this.secretData = res.msg;
+    });
   }
 }

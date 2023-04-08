@@ -8,32 +8,24 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 // Firebase services + environment module
-import {AngularFireModule, FIREBASE_OPTIONS} from '@angular/fire/compat';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import {AngularFireDatabase, AngularFireDatabaseModule} from '@angular/fire/compat/database';
+import {AngularFireModule} from '@angular/fire/compat';
 import {environment} from "../environments/environment";
-import { AuthService } from './shared/service/auth.service';
-import {AccountService} from "./shared/service/account.service";
-import {Auth} from "@angular/fire/auth";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {JwtInterceptor} from "./shared/interceptor/jwt.interceptor";
 
 @NgModule({
     declarations: [AppComponent],
+    entryComponents: [],
     imports: [
       AngularFireModule.initializeApp(environment.firebase),
-      AngularFireAuthModule,
-      AngularFirestoreModule,
-      AngularFireStorageModule,
-      AngularFireDatabaseModule,
+      HttpClientModule,
       BrowserModule,
       IonicModule.forRoot(),
       AppRoutingModule
     ],
     providers: [
-        AuthService,
-      /*{ provide: FIREBASE_OPTIONS, useValue: environment.firebase }, */
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
     ],
     bootstrap: [AppComponent]
 })

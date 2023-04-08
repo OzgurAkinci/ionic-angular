@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from "../../../../shared/service/auth.service";
-import {LoadingService} from "../../../../shared/service/loading.service";
+import {ApiService} from "../../../../shared/service/api.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AlertController, LoadingController} from "@ionic/angular";
 
 @Component({
   selector: 'app-auth-sign-in',
@@ -12,20 +14,43 @@ export class SignInPage implements OnInit{
   public email: any;
   public password: any;
 
+  credentials: FormGroup;
+
   constructor(
+    private fb: FormBuilder,
     public router: Router,
     public authService: AuthService,
-    public loadingService: LoadingService
+    private apiService: ApiService,
+    private alertController: AlertController,
+    private loadingController: LoadingController
   ) { }
 
   ngOnInit() {
+    this.credentials = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+    });
   }
 
-  signIn(){
-    this.loadingService.present();
-    this.authService.signIn(this.email, this.password).then(() => {
-      this.loadingService.dismiss();
-    });
+  async signIn(){
+    const loading = await this.loadingController.create();
+    await loading.present();
+
+    this.apiService.login(this.credentials.value).subscribe(
+      async _ => {
+        await loading.dismiss();
+        this.router.navigateByUrl('/account/view', { replaceUrl: true });
+      },
+      async (res) => {
+        await loading.dismiss();
+        const alert = await this.alertController.create({
+          header: 'Login failed',
+          message: res.error.msg,
+          buttons: ['OK'],
+        });
+        await alert.present();
+      }
+    );
   }
 
 
