@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AccountService} from "../../../../shared/service/account.service";
 import {Camera, CameraResultType, CameraSource} from "@capacitor/camera";
-import {AlertController, LoadingController, ModalController} from "@ionic/angular";
+import {AlertController, LoadingController, ModalController, ScrollDetail} from "@ionic/angular";
 import {AuthService} from "../../../../shared/service/auth.service";
 import {ProfilePhotoOptionComponent} from "../profile-photo-option/profile-photo-option.page";
 
@@ -14,6 +14,7 @@ import {ProfilePhotoOptionComponent} from "../profile-photo-option/profile-photo
 export class AccountViewPage implements OnInit{
   public currentUser: any;
   photo = 'https://i.pravatar.cc/150';
+  showToolbar = false;
 
   constructor(
     private router: Router,
@@ -83,6 +84,13 @@ export class AccountViewPage implements OnInit{
     }
 
      */
+  }
+
+  onScroll($event: CustomEvent<ScrollDetail>) {
+    if ($event && $event.detail && $event.detail.scrollTop) {
+      const scrollTop = $event.detail.scrollTop;
+      this.showToolbar = scrollTop >= 225;
+    }
   }
 
 

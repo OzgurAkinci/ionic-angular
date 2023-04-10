@@ -1,9 +1,22 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>AccountView</ion-title>
+<ion-header [translucent]="true">
+  <ion-toolbar [class.show-background]="showToolbar">
+    <ion-buttons slot="secondary">
+      <ion-button>
+        Help
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button>
+        Customize
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>MovieLover</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]="true" class="ion-padding">
+<ion-content [fullscreen]="true" [scrollEvents]="true" (ionScroll)="onScroll($event)">
   <div class="container">
     <div class="outer"
          [ngStyle]="{'background-image': 'url(' + photo + ')'}">

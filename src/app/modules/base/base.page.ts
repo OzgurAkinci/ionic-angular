@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['base.page.scss']
 })
 export class BasePage {
+  showToolbar = false;
 
   constructor() {}
 
