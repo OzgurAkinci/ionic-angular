@@ -1,5 +1,6 @@
-import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import {inject, NgModule} from '@angular/core';
+import {PreloadAllModules, provideRouter, RouterModule, Routes, withPreloading} from '@angular/router';
+import {AuthService} from "./shared/service/auth.service";
 import {AuthGuard} from "./shared/guard/auth.guard";
 
 const routes: Routes = [
@@ -10,7 +11,6 @@ const routes: Routes = [
   {
     path: 'base',
     loadChildren: () => import('./modules/base/base.module').then(m => m.BaseModule),
-    canLoad: [AuthGuard]
   },
   {
     path: 'auth',
@@ -19,12 +19,13 @@ const routes: Routes = [
   {
     path: 'account',
     loadChildren: () => import('./modules/account/account.module').then(m => m.AccountModule),
+    //canMatch: [() => inject(AuthService).isAuthenticated],
     canLoad: [AuthGuard]
   }
 ];
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+  providers: [
+    provideRouter(routes, withPreloading(PreloadAllModules))
   ],
   exports: [RouterModule]
 })

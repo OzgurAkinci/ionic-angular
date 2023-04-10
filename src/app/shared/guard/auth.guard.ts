@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanLoad, Router } from '@angular/router';
+import {Router} from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators'
 import {AuthService} from "../service/auth.service";
@@ -7,7 +7,7 @@ import {AuthService} from "../service/auth.service";
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanLoad {
+export class AuthGuard{
 
   constructor(private apiService: AuthService, private router: Router) { }
 
